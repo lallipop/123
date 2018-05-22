@@ -29,7 +29,6 @@ def game():
     while len(set(str(st0))) != 4:  
         st0 = randint(1000, 9999)
     print ('Число загадано! Введите 4х значное число: ')
-    print(st0)
     num = 0
     while True:
         num += 1
