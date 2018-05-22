@@ -1,0 +1,83 @@
+from random import randint
+import os
+
+clear = lambda: os.system('cls')
+
+def uniq(i):  
+    for j in range(4):
+        k = j + 1
+        while (k < 4):
+            if (i[j] == i[k]):
+                print('Введите уникальное 4-х значное число!')
+                return False
+            k += 1
+    return True
+
+def again():  
+    print('Хотите сыграть еще раз?')
+    print("1. Играть еще раз")
+    print("2. Выход в главное меню\n")
+    change = int(input())
+    if change == 1:
+        clear()
+        game()
+    elif change == 2:
+        mainmenu()
+
+def game():
+    st0 = 0
+    while len(set(str(st0))) != 4:  
+        st0 = randint(1000, 9999)
+    print ('Число загадано! Введите 4х значное число: ')
+    print(st0)
+    num = 0
+    while True:
+        num += 1
+        print ('номер попытки: ', num)
+        st = input(':')
+
+        if len(st) != 4:
+            print ('Доложно быть 4 цифры')
+            continue
+
+        ls = str(st)
+        ls0 = str(st0)
+
+        if uniq(ls):
+            bulls = 0
+            for j in range(4):
+                if ls[j] == ls0[j]:
+                    bulls += 1;
+        
+            if bulls == 4:
+                print ('Вы угдали!!!\n')
+                again()
+                break
+
+            cown = 0
+            for j in range(4):
+                for k in range(4):
+                    if ls[j] == ls0[k] and j != k:
+                        cown += 1
+                        break
+        
+            print ('Быков: ', bulls)
+            print ('коров: ', cown)
+        
+
+def mainmenu():
+    mainm = 1
+    while mainm:
+        clear()
+        print("Меню: ")
+        print("1. Играть")
+        print("2. Выход из игры")
+        pick = int(input("Ваш выбор: "))
+        if pick == 1:
+            clear()
+            game()
+        elif pick == 2:
+            exit(0)
+    return
+
+mainmenu()
